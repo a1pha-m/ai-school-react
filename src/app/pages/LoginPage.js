@@ -1,10 +1,14 @@
 import React from 'react';
+import Navbar from '../components/navbar';
 import Login from '../components/login'
 
-function LoginPage() {
+export default () => {
     return (
-        <Login></Login>
+        <div>
+            <Navbar></Navbar>
+            <br/>
+            <br/>
+            <Login></Login>
+        </div>
     );
 }
-
-export default LoginPage;

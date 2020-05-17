@@ -1,7 +1,8 @@
 import React from 'react';
+import FolderList from '../components/folder-list';
 
-function LandingPage() {
-    return (<div>Landing</div>);
+export default () => {
+    return (<div>Landing
+        <FolderList></FolderList>
+    </div>);
 }
-
-export default LandingPage;
