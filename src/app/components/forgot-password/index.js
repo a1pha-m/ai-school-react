@@ -1,22 +1,16 @@
-import React, {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {Redirect, Link} from 'react-router-dom';
+import React, {useState} from "react";
+import {useSelector, useDispatch} from "react-redux";
+import {login} from "../login/LoginSlice";
+import {Link, Redirect} from "react-router-dom";
 
-import {login, selectLogin} from './LoginSlice';
-
-export const Login = () => {
-    const dispatch = useDispatch();
-    const loginData = useSelector(selectLogin);
-
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+export const ForgotPassword = () => {
 
     return (
         <div className={'row'}>
             <div className={'card col s12 m6 offset-m3 l4 offset-l4'}>
                 <br/>
                 <div className={'input-field col s12'}>
-                    <input name={'username'} type={'text'} value={username}
+                    <input name={'email_id'} type={'text'} value={email_id}
                            onChange={e => setUsername(e.target.value)} autoFocus={'true'}/>
                     <label htmlFor={'username'}>Username/Email Id</label>
                 </div>

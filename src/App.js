@@ -1,8 +1,9 @@
 import React from 'react';
+import 'materialize-css/dist/css/materialize.min.css';
 
-import LandingPage from './app/pages/LandingPage';
-import LoginPage from './app/pages/LoginPage';
-import RegisterPage from './app/pages/RegisterPage';
+import {LandingPage} from './app/pages/LandingPage';
+import {LoginPage} from './app/pages/LoginPage';
+import {RegisterPage} from './app/pages/RegisterPage';
 
 import {
     BrowserRouter as Router,

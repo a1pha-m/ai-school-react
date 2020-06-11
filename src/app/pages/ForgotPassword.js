@@ -1,14 +1,14 @@
 import React from 'react';
 import {Navbar} from '../components/navbar';
-import {Login} from '../components/login'
+import {ForgotPassword} from '../components/forgot-password'
 
-export const LoginPage = () => {
+export const ForgotPasswordPage = () => {
     return (
         <div>
             <Navbar></Navbar>
             <br/>
             <br/>
-            <Login></Login>
+            <ForgotPassword></ForgotPassword>
         </div>
     );
 }

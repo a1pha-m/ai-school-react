@@ -3,8 +3,8 @@ import {createSlice} from "@reduxjs/toolkit";
 import {server} from "../../server";
 import {apiUrls} from "../../consts";
 
-export const FolderListSlice = createSlice({
-    name: 'folderList',
+export const NotebookListSlice = createSlice({
+    name: 'notebookList',
     initialState: {
         loading: false,
         hasError: false,
@@ -15,7 +15,7 @@ export const FolderListSlice = createSlice({
         order_direction: 'ASC',
         search: '',
         ids: [],
-        folders: []
+        notebooks: []
     },
     reducers: {
         setLoading: (state, {payload}) => {
@@ -23,36 +23,33 @@ export const FolderListSlice = createSlice({
             state.hasError = false;
             state.error = null;
         },
-        getFolderListSuccess: (state, {payload}) => {
+        getNotebookListSuccess: (state, {payload}) => {
             state.loading = false;
             state.hasError = false;
             state.error = null;
-            state.folders = payload.folders;
+            state.notebooks = payload.notebooks;
             state.count = payload.count;
         },
-        getFolderListError: (state, {payload}) => {
+        getNotebookListError: (state, {payload}) => {
             state.loading = false;
             state.hasError = true;
             state.error = payload.error;
-        },
-        addFolder: (state, {payload}) => {
-            state.folders.push(payload.folder);
         }
     }
 });
 
-export const getFolderList = ({page_no, page_size, order_by, order_direction, search, ids} = {}) => async dispatch => {
+export const getNotebookList = ({page_no, page_size, order_by, order_direction, search, ids} = {}) => async dispatch => {
     try {
         dispatch(setLoading({loading: true}));
-        const response = await server.get(apiUrls.getFolderList,);
-        dispatch(getFolderListSuccess(response.data.data));
+        const response = await server.get(apiUrls.getNotebookList,);
+        dispatch(getNotebookListSuccess(response.data.data));
     } catch (e) {
-        dispatch(getFolderListError(e.data));
+        dispatch(getNotebookListError(e.data));
     }
 };
 
-export const {setLoading, getFolderListSuccess, getFolderListError, addFolder} = FolderListSlice.actions;
+export const {setLoading, getNotebookListSuccess, getNotebookListError} = NotebookListSlice.actions;
 
-export const selectFolderList = state => state.folderList;
+export const selectNotebookList = state => state.notebookList;
 
-export const folderListReducer = FolderListSlice.reducer;
+export const notebookListReducer = NotebookListSlice.reducer;

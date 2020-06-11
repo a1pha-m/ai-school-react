@@ -1,7 +1,7 @@
 import React from "react";
 import {createSlice} from "@reduxjs/toolkit";
-import server from '../../server';
-import {loginSlice} from "../login/LoginSlice";
+import {server} from '../../server';
+import {apiUrls} from "../../consts";
 
 export const registerSlice = createSlice({
     name: 'register',
@@ -37,7 +37,7 @@ export const register = ({user_type_id = 1, email_id, password, first_name, last
     try {
         dispatch(setLoading({loading: true}));
 
-        const response = await server.post('/signup', {
+        const response = await server.post(apiUrls.register, {
             user_type_id,
             email_id,
             password,

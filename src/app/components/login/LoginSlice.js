@@ -1,6 +1,7 @@
-import {createSlice} from "@reduxjs/toolkit";
 import React from "react";
-import server from '../../server';
+import {createSlice} from "@reduxjs/toolkit";
+import {server, setAuthorizationToken} from '../../server';
+import {apiUrls} from "../../consts";
 
 export const loginSlice = createSlice({
     name: 'login',
@@ -34,13 +35,14 @@ export const login = ({username, password}) => async dispatch => {
     try {
         dispatch(setLoading({loading: true}))
 
-        const response = await server.post('/signin', {
+        const response = await server.post(apiUrls.login, {
             email_id: username,
             password: password
         });
 
         localStorage.setItem('token', response.data.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.data.user));
+        setAuthorizationToken({token: response.data.data.token});
         dispatch(loginSuccess(response.data.data));
     } catch (e) {
         console.log(e);

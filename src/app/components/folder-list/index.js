@@ -1,9 +1,27 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {selectFolderList, getFolderList} from "./FolderListSlice";
+import {register} from "../register/RegisterSlice";
+import {FolderTile} from "../folder-tile";
 
-export default () => {
+export const FolderList = () => {
+    const dispatch = useDispatch();
+    const folderListData = useSelector(selectFolderList)
+    const {page_no, page_size, order_by, order_direction, search, ids, folders} = folderListData;
 
-    return (<div>
-        Folder List
-    </div>)
+    useEffect(() => {
+        dispatch(getFolderList({page_no, page_size, order_by, order_direction, search, ids}));
+    }, []);
+
+    return (
+        <div>
+            <div className={'row'}>
+                {folders.map((folder) => {
+                    return (
+                        <FolderTile folder={folder}></FolderTile>
+                    )
+                })}
+            </div>
+        </div>
+    );
 };

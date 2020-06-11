@@ -4,7 +4,7 @@ import {Link, Redirect} from 'react-router-dom'
 import {selectRegister, register} from './RegisterSlice'
 import {login} from "../login/LoginSlice";
 
-export default () => {
+export const Register = () => {
     const dispatch = useDispatch();
     const registerData = useSelector(selectRegister)
 
@@ -19,7 +19,7 @@ export default () => {
                 <br/>
                 <div className={'input-field col s12'}>
                     <input name={'email_id'} type={'text'} value={email_id}
-                           onChange={e => setEmailId(e.target.value)}  autoFocus={'true'}/>
+                           onChange={e => setEmailId(e.target.value)} autoFocus={'true'}/>
                     <label htmlFor={'email_id'}>Email Id</label>
                 </div>
                 <div className={'input-field col s12'}>
@@ -39,15 +39,17 @@ export default () => {
                 </div>
 
                 <div className={'center-align'}>
-                    <button type={'submit'} className={'btn waves-effect waves-light'}
+                    <button type={'submit'} className={'btn waves-effect waves-light red'}
                             onClick={() => dispatch(register({email_id, password, first_name, last_name}))}>Register
                     </button>
                     <br/>
                     <br/>
                     <Link className={'btn btn-flat'} to={'/login'}>Login</Link>
                     {registerData.loading ? (<div>loading</div>) : (<div></div>)}
-                    {registerData.hasError ? (<div>{registerData.error.message}</div>) : (<div></div>)}
-                    {registerData.user ? (<div>Registration Successful. Please login to continue.</div>) : (
+                    {registerData.hasError ? (<div className={'red-text'}>{registerData.error.message}</div>) : (
+                        <div></div>)}
+                    {registerData.user ? (
+                        <div className={'green-text'}>Registration Successful. Please login to continue.</div>) : (
                         <div></div>)}
                 </div>
                 <br/>
