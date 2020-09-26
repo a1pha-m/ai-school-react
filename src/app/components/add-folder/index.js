@@ -5,7 +5,7 @@ import {addFolder, selectAddFolder} from "./AddFolderSlice";
 import {login} from "../login/LoginSlice";
 import {Link, Redirect} from "react-router-dom";
 
-export const AddFolder = () => {
+export const AddFolder = ({open}) => {
     const dispatch = useDispatch();
     const addFolderData = useSelector(selectAddFolder)
     const [name, setName] = useState('');
@@ -16,22 +16,25 @@ export const AddFolder = () => {
     const NameTextbox = useRef();
 
     useEffect(() => {
-        const options = {
-            onOpenStart: () => {
-                console.log("Open Start");
-            },
-            onOpenEnd: () => {
-                console.log("Open End");
-            },
-            onCloseStart: () => {
-                console.log("Close Start");
-            },
-            onCloseEnd: () => {
-                console.log("Close End");
-            }
-        };
-        instance = M.Modal.init(Modal.current, options);
+        instance = M.Modal.init(Modal.current, {});
     }, []);
+
+    useEffect(() => {
+        if (open) {
+            showModal();
+        } else {
+            hideModal();
+        }
+    }, [open]);
+
+    const showModal = () => {
+        instance && instance.open();
+    }
+
+    const hideModal = () => {
+        instance && instance.close();
+    };
+
     return (
         <div>
             <div id="add-folder-modal" className={'modal'} ref={Modal}>
